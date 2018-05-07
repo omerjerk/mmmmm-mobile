@@ -16,6 +16,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.reactnativenavigation.NavigationApplication;
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +41,7 @@ public class MainApplication extends NavigationApplication {
       new RNFSPackage(),
       new RandomBytesPackage(),
       new RNNodePackage(),
+      new ReactNativeDocumentPicker(),
       new WorkersPackage(
         new TcpSocketsModule(),
         new RNOSModule(),

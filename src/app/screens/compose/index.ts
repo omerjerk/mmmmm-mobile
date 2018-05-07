@@ -26,6 +26,7 @@ import {SSBSource} from '../../drivers/ssb';
 import {KeyboardSource} from '@cycle/native-keyboard';
 import {Screens} from '../..';
 import publishButton, {Sinks as PBSinks} from './publish-button';
+import attachButton, {Sinks as ABSinks} from './attach-button';
 import intent from './intent';
 import model, {State, publishButtonLens} from './model';
 import view from './view';
@@ -52,7 +53,7 @@ export const navOptions = () => ({
   screen: Screens.Compose,
   navigatorStyle,
   navigatorButtons: {
-    rightButtons: [{component: Screens.ComposePublishButton}],
+    rightButtons: [{component: Screens.ComposePublishButton}, {component: Screens.ComposeAttachButton}],
   },
 });
 
@@ -61,6 +62,10 @@ export function compose(sources: Sources): Sinks {
     '*': 'publishButton',
     onion: publishButtonLens,
   })(sources);
+
+  const attachButtonSinks: ABSinks = isolate(attachButton, {
+    '*': 'attachButton'
+  })(sources)
 
   const actions = intent(
     sources.screen,
@@ -74,7 +79,7 @@ export function compose(sources: Sources): Sinks {
   const newContent$ = ssb(actions);
 
   return {
-    screen: xs.merge(vdom$, publishButtonSinks.screen),
+    screen: xs.merge(vdom$, publishButtonSinks.screen, attachButtonSinks.screen),
     navigation: command$,
     onion: reducer$,
     ssb: newContent$,

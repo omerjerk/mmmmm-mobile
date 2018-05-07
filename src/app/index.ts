@@ -24,6 +24,7 @@ export enum Screens {
   Thread = 'mmmmm.Thread',
   Compose = 'mmmmm.Compose',
   ComposePublishButton = 'mmmmm.Compose.PublishButton',
+  ComposeAttachButton = 'mmmmm.Compose.AttachButton'
 }
 
 import xs, {Stream} from 'xstream';
